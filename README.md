@@ -1,3 +1,5 @@
+<p align="center"><b>English</b> · <a href="README-zh.md">简体中文</a></p>
+
 # OpenXPlay Web Plugins
 
 Optional offline web receiver plugins for `oxp-web-plugin/0`; Stream and Relay implement the core contract independently. Plugins are off by default: the reference receiver creates no plugin frame or requests, and relay plugin routes and channels refuse access. Reviewed packages run without network access under sandbox, CSP and guard layers; the WebRTC guard is a mitigation.
