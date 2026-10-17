@@ -1,0 +1,100 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "provider": "host",
+  "topics": [
+    "parked"
+  ],
+  "vectors": [
+    {
+      "name": "host parked 0",
+      "provider": "host",
+      "topic": "parked",
+      "value": {
+        "state": "unknown",
+        "confirmedBy": null
+      },
+      "valid": true
+    },
+    {
+      "name": "host parked 1",
+      "provider": "host",
+      "topic": "parked",
+      "value": null,
+      "valid": true
+    },
+    {
+      "name": "host parked 2",
+      "provider": "host",
+      "topic": "parked",
+      "value": {},
+      "valid": false
+    },
+    {
+      "name": "host rejects foreign topic",
+      "provider": "host",
+      "topic": "motion",
+      "value": {
+        "speedMps": 0,
+        "accuracyM": 2,
+        "source": "geolocation"
+      },
+      "valid": false
+    }
+  ],
+  "messages": [],
+  "parkedTimeline": [
+    {
+      "atMs": 0,
+      "speedMps": 0,
+      "expected": {
+        "state": "unknown",
+        "confirmedBy": null
+      }
+    },
+    {
+      "atMs": 4999,
+      "expected": {
+        "state": "unknown",
+        "confirmedBy": null
+      }
+    },
+    {
+      "atMs": 5000,
+      "expected": {
+        "state": "parked",
+        "confirmedBy": "speed"
+      }
+    },
+    {
+      "atMs": 5001,
+      "speedMps": 3,
+      "expected": {
+        "state": "moving",
+        "confirmedBy": "speed"
+      }
+    },
+    {
+      "atMs": 5002,
+      "speedMps": null,
+      "expected": {
+        "state": "unknown",
+        "confirmedBy": null
+      }
+    },
+    {
+      "atMs": 6000,
+      "speedMps": 0.49,
+      "expected": {
+        "state": "unknown",
+        "confirmedBy": null
+      }
+    },
+    {
+      "atMs": 11000,
+      "expected": {
+        "state": "parked",
+        "confirmedBy": "speed"
+      }
+    }
+  ]
+}

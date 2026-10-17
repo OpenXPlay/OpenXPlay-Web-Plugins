@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:topic-nowPlaying",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "artist": {
+          "type": "string"
+        },
+        "album": {
+          "type": "string"
+        },
+        "durationMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "elapsedMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "playing": {
+          "type": "boolean"
+        },
+        "rate": {
+          "type": "number",
+          "minimum": 0
+        },
+        "artwork": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^/plugins/artwork/[a-f0-9]{64}$"
+            },
+            "type": {
+              "enum": [
+                "image/png",
+                "image/jpeg",
+                "image/webp"
+              ]
+            }
+          },
+          "required": [
+            "url",
+            "type"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "title",
+        "artist",
+        "album",
+        "durationMs",
+        "elapsedMs",
+        "playing",
+        "rate"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

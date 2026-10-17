@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:topic-motion",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "speedMps": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            }
+          ]
+        },
+        "accuracyM": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            }
+          ]
+        },
+        "source": {
+          "enum": [
+            "geolocation",
+            "vehicle",
+            null
+          ]
+        }
+      },
+      "required": [
+        "speedMps",
+        "accuracyM",
+        "source"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

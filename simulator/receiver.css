@@ -1,0 +1,20 @@
+/*
+SPDX-FileCopyrightText: 2026 OpenXPlay.org
+SPDX-License-Identifier: Apache-2.0 OR MIT
+Created by riko chen on 2026-10-16
+*/
+html { color-scheme:dark;
+  --edge-top:max(.75rem,env(safe-area-inset-top,0px)); --edge-right:max(.75rem,env(safe-area-inset-right,0px));
+  --edge-bottom:max(.75rem,env(safe-area-inset-bottom,0px)); --edge-left:max(.75rem,env(safe-area-inset-left,0px));
+  font:clamp(16px,100vmin / 30,28px) system-ui;
+}
+* { box-sizing:border-box; }
+html,body {width:100%;height:100%;margin:0;background:#080d14;overflow:hidden;font-family:system-ui;}
+canvas {position:absolute;width:100%;height:100%;touch-action:none;}
+button {border:.0625rem solid #2c2c2c;border-radius:.75rem;color:#fff;}
+#gear {position:absolute;margin:var(--edge-top) var(--edge-right) var(--edge-bottom) var(--edge-left);width:3rem;height:3rem;padding:.75rem;background:#151515b3;transition:opacity .4s;touch-action:none;z-index:10;}
+#gear svg {display:block;width:1.5rem;height:1.5rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+#gear.faded {opacity:.3;}
+#gear:hover, #gear:focus-visible {opacity:1;}
+iframe {position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;z-index:2;clip-path:inset(100%);}
+dialog {z-index:20;background:#243449;color:white;border:0;border-radius:16px;}

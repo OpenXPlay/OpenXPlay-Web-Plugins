@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:topic-activity",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "siri": {
+          "type": "boolean"
+        },
+        "phoneCall": {
+          "type": "boolean"
+        },
+        "navigation": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "siri",
+        "phoneCall",
+        "navigation"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

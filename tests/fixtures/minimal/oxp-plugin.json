@@ -1,0 +1,23 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.minimal",
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": {
+    "en": "Fixture"
+  },
+  "description": {
+    "en": "Contract fixture"
+  },
+  "icon": "icon.svg",
+  "permissions": [],
+  "surfaces": [
+    {
+      "id": "main",
+      "kind": "companion",
+      "entry": "index.html",
+      "usage": "driving"
+    }
+  ],
+  "quickActions": []
+}

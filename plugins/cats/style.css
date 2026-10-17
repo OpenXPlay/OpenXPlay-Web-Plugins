@@ -1,0 +1,36 @@
+/*
+SPDX-FileCopyrightText: 2026 OpenXPlay.org
+SPDX-License-Identifier: Apache-2.0 OR MIT
+Created by riko chen on 2026-10-16
+*/
+* { box-sizing: border-box; }
+:root { font: 16px system-ui, sans-serif; color: #fff0dd; color-scheme: light; }
+body { margin: 0; background: transparent; overscroll-behavior: none; touch-action: none; }
+button, input, select { font: inherit; min-height: 56px; min-width: 56px; border-radius: 12px; border: 1px solid #79675e; color: inherit; background: #443b40; padding: 8px; touch-action: none; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #ffd18d; outline-offset: -3px; }
+button[aria-pressed="true"] { background: #775139; border-color: #efc38d; }
+button:disabled { opacity: .5; }
+.companion #root { width: 100vw; height: 100vh; display: grid; place-items: center; }
+.cat { padding: 0; background: transparent; border: 0; }
+.cat canvas { display: block; image-rendering: pixelated; pointer-events: none; }
+.panel { background: #2b252d; }
+.panel #root { padding: 24px; display: grid; gap: 8px; }
+h1 { font-size: 20px; margin: 0; line-height: 24px; }
+.row { display: flex; gap: 8px; }
+.row button { flex: 1; }
+.fields { display: grid; gap: 8px; min-height: 160px; align-content: start; }
+label { display: grid; line-height: 20px; }
+select, input { width: 100%; }
+p { font-size: 16px; line-height: 22px; margin: 0; }
+.status { color: #efcfa7; }
+.primary { background: #ebbd88; color: #302724; border-color: #ebbd88; }
+.fullscreen { background: #29262f; }
+.fullscreen #root { padding: 24px; height: 100vh; display: grid; grid-template-rows: 56px 1fr 22px 22px 64px; gap: 4px; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.room { display: grid; place-items: center; background: radial-gradient(ellipse at bottom, #76604f 0, #38303a 60%, #29262f 85%); border-radius: 24px; overflow: hidden; }
+.fullscreen p { text-align: center; }
+.yarn { width: 160px; border: 2px solid #f3cd9e; background: #725143; }
+.yarn::before { content: '◉'; margin-right: 12px; color: #f9c492; font-size: 24px; }
+.yarn[data-side="right"] { justify-self: end; }
+@media (max-height: 460px) { .fullscreen .cat { max-height: 160px; max-width: 160px; } .fullscreen canvas { max-width: 100%; max-height: 100%; } }

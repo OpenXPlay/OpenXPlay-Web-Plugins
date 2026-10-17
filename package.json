@@ -1,0 +1,21 @@
+{
+  "name": "@openxplay/web-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0 OR MIT",
+  "scripts": {
+    "build": "node build.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "dev": "node tools/dev.js",
+    "validate": "node tools/validate.js",
+    "pack": "node tools/pack.js",
+    "conformance": "node tools/conformance.js"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "7.1.12",
+    "vitest": "3.2.4"
+  }
+}

@@ -1,0 +1,4 @@
+<!-- SPDX-FileCopyrightText: 2026 OpenXPlay.org
+SPDX-License-Identifier: Apache-2.0 OR MIT
+Created by riko chen on 2026-10-16 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="19" fill="#dff4ff"/><path d="M15 31Q13 12 32 12Q51 12 49 31L53 48Q32 59 11 48Z" fill="#526dab"/><ellipse cx="32" cy="33" rx="16" ry="15" fill="#fff0e8"/><path d="M17 29Q20 11 35 17L48 30 36 24 31 30 26 24Z" fill="#526dab"/><path d="M24 33v4m16-4v4" stroke="#2b416b" stroke-width="4" stroke-linecap="round"/><path d="M29 42q3 3 6 0" fill="none" stroke="#ca7d95" stroke-width="2"/><circle cx="14" cy="13" r="5" fill="#8fd9ef"/></svg>

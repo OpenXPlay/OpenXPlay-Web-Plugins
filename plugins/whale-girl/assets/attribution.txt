@@ -1,0 +1,21 @@
+鲸鱼娘 by 上善无形
+https://www.bilibili.com/opus/1231977657712771073
+CC BY-NC-SA 4.0
+
+Maid design by ZipZipPipe
+https://www.pixiv.net/artworks/148186519
+CC BY-NC-SA 4.0
+
+Sprite atlas by YunYueSama
+作者：YunYueSama
+仓库：https://github.com/YunYueSama/codex-deepseek-pet
+Commit: 7661c8b304c5400701f91da01b1a643a207331de
+Licence: 大肥鱼项目署名许可 1.0 (LicenseRef-YunYueSama-1.0).
+The full licence accompanies these files in license-yunyuesama.txt.
+
+Modification: apron emblem removed; rows relabelled.
+Modified by OpenXPlay.org on 2026-10-16, released under CC BY-NC-SA 4.0.
+The full CC BY-NC-SA 4.0 legal code accompanies these files in license.txt.
+
+The character is a community fan character, not affiliated with or endorsed by DeepSeek.
+The assets may not be used commercially.

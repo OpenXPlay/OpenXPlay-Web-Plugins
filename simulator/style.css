@@ -1,0 +1,6 @@
+/*
+SPDX-FileCopyrightText: 2026 OpenXPlay.org
+SPDX-License-Identifier: Apache-2.0 OR MIT
+Created by riko chen on 2026-10-16
+*/
+body { background:#0c1420; color:#edf4fb; font:16px system-ui; margin:20px; } h1 {font-size:22px;} button, select, input {font:inherit; min-height:40px; margin:4px; } #controls {max-width:1280px;} #head {border:2px solid #48576a; display:block; max-width:none;} output {display:block; white-space:pre-wrap;}

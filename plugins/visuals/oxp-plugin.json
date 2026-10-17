@@ -1,0 +1,81 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.visuals",
+  "version": "0.1.0",
+  "license": "Apache-2.0 OR MIT",
+  "name": {
+    "en": "Quiet Lights",
+    "zh-CN": "静谧光景"
+  },
+  "description": {
+    "en": "Song progress, album glow, a local-time sky and a cozy parked fireplace.",
+    "zh-CN": "歌曲进度光带、封面氛围光、日夜天空和驻车温馨壁炉。"
+  },
+  "icon": "icon.svg",
+  "permissions": [
+    "nowPlaying",
+    "nowPlaying.artwork",
+    "storage"
+  ],
+  "surfaces": [
+    {
+      "id": "ambient",
+      "kind": "ambient",
+      "entry": "ambient.html",
+      "usage": "driving",
+      "label": {
+        "en": "Scenery",
+        "zh-CN": "风景"
+      }
+    },
+    {
+      "id": "panel",
+      "kind": "panel",
+      "entry": "panel.html",
+      "usage": "driving",
+      "label": {
+        "en": "Scenery settings",
+        "zh-CN": "风景设置"
+      }
+    },
+    {
+      "id": "fireplace",
+      "kind": "fullscreen",
+      "entry": "fireplace.html",
+      "usage": "parked",
+      "label": {
+        "en": "Fireplace",
+        "zh-CN": "壁炉"
+      }
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "toggle",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Lights",
+        "zh-CN": "光景"
+      }
+    },
+    {
+      "id": "settings",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Light settings",
+        "zh-CN": "光景设置"
+      },
+      "opens": "panel"
+    },
+    {
+      "id": "cozy",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Cozy fireplace",
+        "zh-CN": "温馨壁炉"
+      },
+      "opens": "fireplace"
+    }
+  ],
+  "author": "OpenXPlay.org"
+}

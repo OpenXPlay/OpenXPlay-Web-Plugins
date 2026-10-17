@@ -1,0 +1,95 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "provider": "receiver",
+  "topics": [
+    "motion"
+  ],
+  "vectors": [
+    {
+      "name": "receiver motion 0",
+      "provider": "receiver",
+      "topic": "motion",
+      "value": {
+        "speedMps": 0,
+        "accuracyM": 2,
+        "source": "geolocation"
+      },
+      "valid": true
+    },
+    {
+      "name": "receiver motion 1",
+      "provider": "receiver",
+      "topic": "motion",
+      "value": null,
+      "valid": true
+    },
+    {
+      "name": "receiver motion 2",
+      "provider": "receiver",
+      "topic": "motion",
+      "value": {},
+      "valid": false
+    },
+    {
+      "name": "receiver rejects foreign topic",
+      "provider": "receiver",
+      "topic": "session",
+      "value": {
+        "carplay": "connected"
+      },
+      "valid": false
+    }
+  ],
+  "messages": [
+    {
+      "name": "receiver motion 0 message",
+      "schema": "host-message",
+      "value": {
+        "type": "state",
+        "topic": "motion",
+        "value": {
+          "speedMps": 0,
+          "accuracyM": 2,
+          "source": "geolocation"
+        },
+        "oxp": "host/0"
+      },
+      "valid": true
+    },
+    {
+      "name": "receiver motion 1 message",
+      "schema": "host-message",
+      "value": {
+        "type": "state",
+        "topic": "motion",
+        "value": null,
+        "oxp": "host/0"
+      },
+      "valid": true
+    },
+    {
+      "name": "receiver motion 2 message",
+      "schema": "host-message",
+      "value": {
+        "type": "state",
+        "topic": "motion",
+        "value": {},
+        "oxp": "host/0"
+      },
+      "valid": false
+    },
+    {
+      "name": "receiver rejects foreign topic message",
+      "schema": "host-message",
+      "value": {
+        "type": "state",
+        "topic": "session",
+        "value": {
+          "carplay": "connected"
+        },
+        "oxp": "host/0"
+      },
+      "valid": false
+    }
+  ]
+}

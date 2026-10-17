@@ -1,0 +1,6 @@
+<!--
+SPDX-FileCopyrightText: 2026 OpenXPlay.org
+SPDX-License-Identifier: Apache-2.0 OR MIT
+Created by riko chen on 2026-10-16
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="19" fill="#162631"/><path d="M18 41V23q0-5 5-5h18q5 0 5 5v18q0 5-5 5H23" fill="none" stroke="#97e7c6" stroke-width="4" stroke-linecap="round"/><circle cx="23" cy="46" r="4" fill="#ffcf8d"/><path d="M32 25l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#ffcf8d"/></svg>

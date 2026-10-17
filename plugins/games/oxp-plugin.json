@@ -1,0 +1,132 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.games",
+  "version": "0.1.0",
+  "license": "Apache-2.0 OR MIT",
+  "name": {
+    "en": "Pocket Playroom",
+    "zh-CN": "口袋游戏屋"
+  },
+  "description": {
+    "en": "Offline tap games for parked moments. Hold, choose, duel, connect and discover song bingo.",
+    "zh-CN": "停车时玩的离线轻触游戏：手指抽签、反应对决、棋盘游戏与猜歌宾果。"
+  },
+  "icon": "icon.svg",
+  "permissions": [
+    "nowPlaying",
+    "call",
+    "activity",
+    "storage"
+  ],
+  "surfaces": [
+    {
+      "id": "menu",
+      "kind": "panel",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Games menu",
+        "zh-CN": "游戏菜单"
+      }
+    },
+    {
+      "id": "chooser",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Finger chooser",
+        "zh-CN": "手指抽签"
+      }
+    },
+    {
+      "id": "duel",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Reaction duel",
+        "zh-CN": "反应对决"
+      }
+    },
+    {
+      "id": "gomoku",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Gomoku",
+        "zh-CN": "五子棋"
+      }
+    },
+    {
+      "id": "connect",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Connect Four",
+        "zh-CN": "四子棋"
+      }
+    },
+    {
+      "id": "tic",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Tic-tac-toe",
+        "zh-CN": "井字棋"
+      }
+    },
+    {
+      "id": "bingo",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Song bingo",
+        "zh-CN": "猜歌宾果"
+      }
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "menu",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Games",
+        "zh-CN": "游戏"
+      },
+      "opens": "menu"
+    },
+    {
+      "id": "chooser",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Finger chooser",
+        "zh-CN": "手指抽签"
+      },
+      "opens": "chooser"
+    },
+    {
+      "id": "duel",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Reaction duel",
+        "zh-CN": "反应对决"
+      },
+      "opens": "duel"
+    },
+    {
+      "id": "bingo",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Song bingo",
+        "zh-CN": "猜歌宾果"
+      },
+      "opens": "bingo"
+    }
+  ],
+  "author": "OpenXPlay.org"
+}

@@ -1,0 +1,542 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:manifest",
+  "type": "object",
+  "properties": {
+    "spec": {
+      "const": "oxp-web-plugin/0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9.+(): -]+$"
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "en"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      }
+    },
+    "description": {
+      "type": "object",
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "en"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      }
+    },
+    "icon": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^(?!.*(?:^|/)\\.)(?!.*//)[a-z0-9][a-z0-9._/-]*\\.(svg|png)$"
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "session",
+          "nowPlaying",
+          "nowPlaying.artwork",
+          "call",
+          "activity",
+          "storage",
+          "route",
+          "motion",
+          "audioSource"
+        ]
+      },
+      "maxItems": 9
+    },
+    "surfaces": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "kind": {
+                "const": "companion"
+              },
+              "entry": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^(?!.*(?:^|/)\\.)(?!.*//)[a-z0-9][a-z0-9._/-]*\\.html$"
+              },
+              "usage": {
+                "enum": [
+                  "driving",
+                  "parked"
+                ]
+              },
+              "size": {
+                "type": "object",
+                "properties": {
+                  "w": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 160
+                  },
+                  "h": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 160
+                  }
+                },
+                "required": [
+                  "w",
+                  "h"
+                ],
+                "additionalProperties": true,
+                "description": "Initial size and per-axis maximum for runtime surface-request; omitted means 160x160 maximum (120x120 initial)."
+              },
+              "anchor": {
+                "enum": [
+                  "top-left",
+                  "top-right",
+                  "bottom-left",
+                  "bottom-right",
+                  "left",
+                  "right",
+                  "top",
+                  "bottom"
+                ]
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2048
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                }
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "entry",
+              "usage"
+            ],
+            "additionalProperties": true
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "kind": {
+                "const": "ambient"
+              },
+              "entry": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^(?!.*(?:^|/)\\.)(?!.*//)[a-z0-9][a-z0-9._/-]*\\.html$"
+              },
+              "usage": {
+                "enum": [
+                  "driving",
+                  "parked"
+                ]
+              },
+              "size": {
+                "type": "object",
+                "properties": {
+                  "w": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "h": {
+                    "type": "number",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "w",
+                  "h"
+                ],
+                "additionalProperties": true
+              },
+              "anchor": {
+                "enum": [
+                  "top-left",
+                  "top-right",
+                  "bottom-left",
+                  "bottom-right",
+                  "left",
+                  "right",
+                  "top",
+                  "bottom"
+                ]
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2048
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                }
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "entry",
+              "usage"
+            ],
+            "additionalProperties": true
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "kind": {
+                "const": "panel"
+              },
+              "entry": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^(?!.*(?:^|/)\\.)(?!.*//)[a-z0-9][a-z0-9._/-]*\\.html$"
+              },
+              "usage": {
+                "enum": [
+                  "driving",
+                  "parked"
+                ]
+              },
+              "size": {
+                "type": "object",
+                "properties": {
+                  "w": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "h": {
+                    "type": "number",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "w",
+                  "h"
+                ],
+                "additionalProperties": true
+              },
+              "anchor": {
+                "enum": [
+                  "top-left",
+                  "top-right",
+                  "bottom-left",
+                  "bottom-right",
+                  "left",
+                  "right",
+                  "top",
+                  "bottom"
+                ]
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2048
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                }
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "entry",
+              "usage"
+            ],
+            "additionalProperties": true
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "kind": {
+                "const": "fullscreen"
+              },
+              "entry": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^(?!.*(?:^|/)\\.)(?!.*//)[a-z0-9][a-z0-9._/-]*\\.html$"
+              },
+              "usage": {
+                "const": "parked"
+              },
+              "size": {
+                "type": "object",
+                "properties": {
+                  "w": {
+                    "type": "number",
+                    "minimum": 1
+                  },
+                  "h": {
+                    "type": "number",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "w",
+                  "h"
+                ],
+                "additionalProperties": true
+              },
+              "anchor": {
+                "enum": [
+                  "top-left",
+                  "top-right",
+                  "bottom-left",
+                  "bottom-right",
+                  "left",
+                  "right",
+                  "top",
+                  "bottom"
+                ]
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2048
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                }
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "entry",
+              "usage"
+            ],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "maxItems": 32
+    },
+    "quickActions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "icon": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[a-z0-9][a-z0-9._/-]*$"
+          },
+          "label": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            }
+          },
+          "opens": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        },
+        "required": [
+          "id",
+          "icon",
+          "label"
+        ],
+        "additionalProperties": true
+      },
+      "maxItems": 32
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "attributions": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            }
+          },
+          "links": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "url": {
+                  "type": "string",
+                  "maxLength": 2048,
+                  "pattern": "^https?://[^\\s]+$"
+                }
+              },
+              "required": [
+                "label",
+                "url"
+              ]
+            }
+          }
+        },
+        "required": [
+          "text"
+        ]
+      }
+    }
+  },
+  "required": [
+    "spec",
+    "id",
+    "version",
+    "license",
+    "name",
+    "description",
+    "icon",
+    "permissions",
+    "surfaces",
+    "quickActions"
+  ],
+  "additionalProperties": true,
+  "description": "The launcher shows one plugin tile using icon and localized name. Its primary surface is the first panel, else first companion (else first surface). Secondary surfaces and quick actions live in a plugin detail view; surface label is optional with a localized kind/ordinal fallback. Companion iframe and document canvases are transparent with light color-scheme, and placement avoids receiver gear and host dock rectangles."
+}

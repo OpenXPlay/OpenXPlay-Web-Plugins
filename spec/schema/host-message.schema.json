@@ -1,0 +1,717 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:host-message",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "init"
+        },
+        "locale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "theme": {
+          "enum": [
+            "light",
+            "dark"
+          ]
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "viewport": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": true
+        },
+        "video": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h"
+          ],
+          "additionalProperties": true
+        },
+        "gear": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            },
+            "side": {
+              "enum": [
+                "left",
+                "right"
+              ]
+            },
+            "faded": {
+              "type": "boolean",
+              "description": "Gear and dock opacity is 0.3 when true; absent means awake."
+            },
+            "gap": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Adjacent control gap in viewport CSS pixels; receiver .5rem, defaults to 8."
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h",
+            "side"
+          ],
+          "additionalProperties": true
+        },
+        "channel": {
+          "const": "/plugins/channel"
+        },
+        "hostPrefs": {
+          "type": "object",
+          "description": "Receiver-owned JSON preferences, at most 4096 UTF-8 bytes when JSON encoded. The opaque host never uses localStorage.",
+          "x-maxJsonBytes": 4096
+        },
+        "screenScale": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number",
+              "minimum": 1e-06
+            },
+            "y": {
+              "type": "number",
+              "minimum": 1e-06
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": true,
+          "description": "Optional rendered screen pixels per viewport CSS pixel, including ancestor frame CSS scaling. Receiver measures frame getBoundingClientRect dimensions divided by layout dimensions. Defaults to 1 per axis. Host divides cumulative screen drag deltas by this scale for dock and companion movement."
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "motion"
+            ]
+          },
+          "maxItems": 1
+        },
+        "developer": {
+          "type": "boolean",
+          "description": "Receiver developer preference; omitted means false. Never supplied by plugins."
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "locale",
+        "theme",
+        "reducedMotion",
+        "viewport",
+        "video",
+        "gear",
+        "channel"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "geometry"
+        },
+        "locale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "theme": {
+          "enum": [
+            "light",
+            "dark"
+          ]
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "viewport": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": true
+        },
+        "video": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h"
+          ],
+          "additionalProperties": true
+        },
+        "gear": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            },
+            "side": {
+              "enum": [
+                "left",
+                "right"
+              ]
+            },
+            "faded": {
+              "type": "boolean",
+              "description": "Gear and dock opacity is 0.3 when true; absent means awake."
+            },
+            "gap": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Adjacent control gap in viewport CSS pixels; receiver .5rem, defaults to 8."
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h",
+            "side"
+          ],
+          "additionalProperties": true
+        },
+        "channel": {
+          "const": "/plugins/channel"
+        },
+        "hostPrefs": {
+          "type": "object",
+          "description": "Receiver-owned JSON preferences, at most 4096 UTF-8 bytes when JSON encoded. The opaque host never uses localStorage.",
+          "x-maxJsonBytes": 4096
+        },
+        "screenScale": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number",
+              "minimum": 1e-06
+            },
+            "y": {
+              "type": "number",
+              "minimum": 1e-06
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": true,
+          "description": "Optional rendered screen pixels per viewport CSS pixel, including ancestor frame CSS scaling. Receiver measures frame getBoundingClientRect dimensions divided by layout dimensions. Defaults to 1 per axis. Host divides cumulative screen drag deltas by this scale for dock and companion movement."
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "motion"
+            ]
+          },
+          "maxItems": 1
+        },
+        "developer": {
+          "type": "boolean",
+          "description": "Receiver developer preference; omitted means false. Never supplied by plugins."
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "locale",
+        "theme",
+        "reducedMotion",
+        "viewport",
+        "video",
+        "gear",
+        "channel"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "ping"
+        },
+        "seq": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "seq"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "pong"
+        },
+        "seq": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "seq"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "visibility"
+        },
+        "visible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "visible"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "receiver-state"
+        },
+        "state": {
+          "enum": [
+            "waiting",
+            "playing",
+            "error"
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "state"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "collapse"
+        }
+      },
+      "required": [
+        "oxp",
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "reset-positions"
+        }
+      },
+      "required": [
+        "oxp",
+        "type"
+      ],
+      "additionalProperties": true,
+      "description": "Receiver to host: clear dock and companion positions, retain surface selections, and publish updated host-prefs. Defaults place the dock beside the top-right gear and companions at their declared anchors."
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "ready"
+        },
+        "spec": {
+          "const": "oxp-web-plugin/0"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "spec"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "layout"
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "w": {
+                "type": "number",
+                "minimum": 0
+              },
+              "h": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "w",
+              "h"
+            ],
+            "additionalProperties": true
+          },
+          "maxItems": 32
+        },
+        "cover": {
+          "enum": [
+            "none",
+            "panel",
+            "fullscreen"
+          ]
+        },
+        "launcher": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h"
+          ],
+          "additionalProperties": true,
+          "description": "Optional user-opened host launcher rectangle, also present in regions. Exempt from the plugin surface area budget only while cover is panel."
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "regions",
+        "cover"
+      ],
+      "additionalProperties": true,
+      "description": "Receiver clamps regions to viewport and the non-fullscreen 40% plugin union budget, then subtracts its gear rectangle from every region, including fullscreen and fallback/collapse regions. The optional user-opened launcher is excluded from the budget; plugin surfaces remain capped. The gear stays above the host."
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "diagnostic"
+        },
+        "level": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "level",
+        "code",
+        "detail"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "host-prefs"
+        },
+        "value": {
+          "type": "object",
+          "description": "Receiver-owned JSON preferences, at most 4096 UTF-8 bytes when JSON encoded. The opaque host never uses localStorage.",
+          "x-maxJsonBytes": 4096
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "value"
+      ],
+      "additionalProperties": true,
+      "description": "Host to receiver only; accept only from the host frame window. Validate a JSON object of at most 4096 UTF-8 bytes and save in receiver-owned localStorage. Send the saved object in init/geometry.hostPrefs. Reference host shape: {dock:{x,y,dragged:true}, companions:{\"<pluginId>/<surfaceId>\":{x,y,anchor?}}}, in viewport CSS pixels. The dock is saved only after a user drag (including drags from pinned quick actions). Unmarked legacy dock points or rectangles cannot distinguish automatic placement from a drag and are discarded; the dock follows the gear until dragged. Preferences bootstrap a host once; geometry echoes never overwrite live preferences or undo a reset. No relay plugin storage permission is required. Optional surfaces map: {\"<pluginId>/<surfaceId>\":{anchor?,x?,y?}} records selected companion and ambient surfaces, including anchored surfaces never dragged. Restore automatically after channel manifests and receiver preferences are ready, subject to visibility, parked and surface limits; retain pending selections across temporary gates. Close removes the selection and position; disabled/uninstalled plugins and removed surfaces are pruned. Panels and fullscreen surfaces are never restored. The companions map retains free-position compatibility."
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "motion"
+        },
+        "value": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "$id": "urn:oxp-web-plugin:0:topic-motion",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "speedMps": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  ]
+                },
+                "accuracyM": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  ]
+                },
+                "source": {
+                  "enum": [
+                    "geolocation",
+                    "vehicle",
+                    null
+                  ]
+                }
+              },
+              "required": [
+                "speedMps",
+                "accuracyM",
+                "source"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "host/0"
+        },
+        "type": {
+          "const": "wake"
+        }
+      },
+      "required": [
+        "oxp",
+        "type"
+      ],
+      "additionalProperties": true,
+      "description": "Host to receiver: wake the gear and restart its inactivity timer; accept only from the host frame window."
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!(?:reset-positions|wake|state|host-prefs|collapse|diagnostic|geometry|init|layout|ping|pong|ready|receiver-state|visibility)$).+"
+        },
+        "oxp": {
+          "const": "host/0"
+        }
+      },
+      "required": [
+        "type",
+        "oxp"
+      ],
+      "additionalProperties": true,
+      "description": "Unknown message types are ignored within this major version."
+    }
+  ]
+}

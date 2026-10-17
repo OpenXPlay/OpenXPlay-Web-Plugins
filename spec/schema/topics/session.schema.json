@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:topic-session",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "carplay": {
+          "enum": [
+            "connected",
+            "disconnected"
+          ]
+        }
+      },
+      "required": [
+        "carplay"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

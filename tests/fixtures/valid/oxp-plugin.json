@@ -1,0 +1,91 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.fixture",
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": {
+    "en": "Fixture"
+  },
+  "description": {
+    "en": "Contract fixture"
+  },
+  "icon": "icon.svg",
+  "permissions": [
+    "session",
+    "nowPlaying",
+    "nowPlaying.artwork",
+    "call",
+    "activity",
+    "storage"
+  ],
+  "surfaces": [
+    {
+      "id": "widget",
+      "kind": "companion",
+      "entry": "index.html",
+      "usage": "driving",
+      "size": {
+        "w": 120,
+        "h": 120
+      },
+      "anchor": "top-left",
+      "label": {
+        "en": "Pet",
+        "zh-CN": "\u5ba0\u7269"
+      }
+    },
+    {
+      "id": "panel",
+      "kind": "panel",
+      "entry": "index.html",
+      "usage": "driving",
+      "label": {
+        "en": "Settings",
+        "zh-CN": "\u8bbe\u7f6e"
+      }
+    },
+    {
+      "id": "full",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Games",
+        "zh-CN": "\u6e38\u620f"
+      }
+    },
+    {
+      "id": "ambient",
+      "kind": "ambient",
+      "entry": "index.html",
+      "usage": "driving",
+      "label": {
+        "en": "Backdrop",
+        "zh-CN": "\u80cc\u666f"
+      }
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "tap",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Tap"
+      }
+    }
+  ],
+  "author": "Fixture author",
+  "attributions": [
+    {
+      "text": {
+        "en": "Fixture artwork by Artist \u2014 CC BY-NC-SA 4.0"
+      },
+      "links": [
+        {
+          "label": "Artist",
+          "url": "https://example.org/artist"
+        }
+      ]
+    }
+  ]
+}

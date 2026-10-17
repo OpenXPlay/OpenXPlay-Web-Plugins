@@ -1,0 +1,61 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.fixture",
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": {
+    "en": "Fixture"
+  },
+  "description": {
+    "en": "Contract fixture"
+  },
+  "icon": "icon.svg",
+  "permissions": [
+    "session",
+    "nowPlaying",
+    "nowPlaying.artwork",
+    "call",
+    "activity",
+    "storage"
+  ],
+  "surfaces": [
+    {
+      "id": "widget",
+      "kind": "companion",
+      "entry": "index.html",
+      "usage": "driving",
+      "size": {
+        "w": 120,
+        "h": 120
+      },
+      "anchor": "top-left"
+    },
+    {
+      "id": "panel",
+      "kind": "panel",
+      "entry": "index.html",
+      "usage": "driving"
+    },
+    {
+      "id": "full",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked"
+    },
+    {
+      "id": "ambient",
+      "kind": "ambient",
+      "entry": "index.html",
+      "usage": "driving"
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "tap",
+      "icon": "icon.svg",
+      "label": {
+        "en": "Tap"
+      }
+    }
+  ]
+}

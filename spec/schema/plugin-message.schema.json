@@ -1,0 +1,1286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:plugin-message",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "hello"
+        },
+        "spec": {
+          "const": "oxp-web-plugin/0"
+        },
+        "sdk": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "spec",
+        "sdk"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "welcome"
+        },
+        "pluginId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$"
+        },
+        "surface": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
+            "kind": {
+              "enum": [
+                "companion",
+                "ambient",
+                "panel",
+                "fullscreen"
+              ]
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            },
+            "closing": {
+              "type": "boolean"
+            },
+            "anchor": {
+              "enum": [
+                "top-left",
+                "top-right",
+                "bottom-left",
+                "bottom-right",
+                "left",
+                "right",
+                "top",
+                "bottom"
+              ]
+            },
+            "visible": {
+              "type": "boolean"
+            },
+            "calm": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "w",
+            "h"
+          ],
+          "additionalProperties": true
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "session",
+              "nowPlaying",
+              "nowPlaying.artwork",
+              "call",
+              "activity",
+              "storage",
+              "route",
+              "motion",
+              "audioSource"
+            ]
+          },
+          "maxItems": 9
+        },
+        "locale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "theme": {
+          "enum": [
+            "light",
+            "dark"
+          ]
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "parked": {
+          "enum": [
+            "confirmed",
+            "unknown"
+          ]
+        },
+        "state": {
+          "type": "object"
+        },
+        "spec": {
+          "const": "oxp-web-plugin/0"
+        },
+        "video": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h"
+          ],
+          "additionalProperties": true,
+          "description": "CarPlay picture in CSS pixels relative to this surface origin; x/y may be negative. Width/height describe the full picture, not its intersection with the surface."
+        },
+        "viewport": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": true,
+          "description": "Receiver viewport size in CSS pixels."
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "session",
+              "nowPlaying",
+              "call",
+              "activity",
+              "route",
+              "motion",
+              "parked",
+              "audioSource"
+            ]
+          },
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "pluginId",
+        "surface",
+        "permissions",
+        "locale",
+        "theme",
+        "reducedMotion",
+        "parked",
+        "state"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "ping"
+        },
+        "seq": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "seq"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "pong"
+        },
+        "seq": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "seq"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "storage-get"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "storage-set"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "id",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "open"
+        },
+        "surface": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "surface"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "close"
+        }
+      },
+      "required": [
+        "oxp",
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "quick-action-state"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "badge": {
+          "type": "string",
+          "maxLength": 3
+        },
+        "active": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "surface"
+        },
+        "w": {
+          "type": "number",
+          "minimum": 0
+        },
+        "h": {
+          "type": "number",
+          "minimum": 0
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "calm": {
+          "type": "boolean"
+        },
+        "video": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h"
+          ],
+          "additionalProperties": true,
+          "description": "CarPlay picture in CSS pixels relative to this surface origin; x/y may be negative. Width/height describe the full picture, not its intersection with the surface."
+        },
+        "viewport": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "number",
+              "minimum": 0
+            },
+            "h": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": true,
+          "description": "Receiver viewport size in CSS pixels."
+        },
+        "closing": {
+          "type": "boolean",
+          "description": "Final save signal for covers. The host hides input immediately, accepts storage writes, and unloads within 500 ms. Persistent surfaces stay loaded with calm:true and visible:false during calm."
+        },
+        "anchor": {
+          "enum": [
+            "top-left",
+            "top-right",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ]
+        },
+        "locale": {
+          "type": "string"
+        },
+        "theme": {
+          "enum": [
+            "light",
+            "dark"
+          ]
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "motion": {
+          "enum": [
+            "normal",
+            "idle",
+            "frozen"
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "w",
+        "h",
+        "visible",
+        "calm"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "parked"
+        },
+        "value": {
+          "enum": [
+            "confirmed",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "quick-action"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "artwork"
+        },
+        "bitmap": {}
+      },
+      "required": [
+        "oxp",
+        "type",
+        "bitmap"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "session"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "carplay": {
+                  "enum": [
+                    "connected",
+                    "disconnected"
+                  ]
+                }
+              },
+              "required": [
+                "carplay"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "nowPlaying"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "artist": {
+                  "type": "string"
+                },
+                "album": {
+                  "type": "string"
+                },
+                "durationMs": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "elapsedMs": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "playing": {
+                  "type": "boolean"
+                },
+                "rate": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "artwork": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "pattern": "^/plugins/artwork/[a-f0-9]{64}$"
+                    },
+                    "type": {
+                      "enum": [
+                        "image/png",
+                        "image/jpeg",
+                        "image/webp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "url",
+                    "type"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "title",
+                "artist",
+                "album",
+                "durationMs",
+                "elapsedMs",
+                "playing",
+                "rate"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "call"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "enum": [
+                    "idle",
+                    "ringing",
+                    "dialing",
+                    "active",
+                    "held",
+                    "ending"
+                  ]
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "activity"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "siri": {
+                  "type": "boolean"
+                },
+                "phoneCall": {
+                  "type": "boolean"
+                },
+                "navigation": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "siri",
+                "phoneCall",
+                "navigation"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "storage"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "id",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "storage-ok"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "error"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "code": {
+          "enum": [
+            "quota",
+            "rate",
+            "unknown-plugin",
+            "permission",
+            "protocol"
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "code"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "surface-request"
+        },
+        "anchor": {
+          "enum": [
+            "top-left",
+            "top-right",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ]
+        },
+        "size": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 160
+            },
+            "h": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 160
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": true,
+          "description": "Initial size and per-axis maximum for runtime surface-request; omitted means 160x160 maximum (120x120 initial)."
+        },
+        "move": {
+          "type": "object",
+          "properties": {
+            "phase": {
+              "enum": [
+                "start",
+                "move",
+                "end"
+              ]
+            },
+            "dx": {
+              "type": "number"
+            },
+            "dy": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "phase",
+            "dx",
+            "dy"
+          ],
+          "additionalProperties": true,
+          "description": "Companion-only drag. Cumulative CSS screen-coordinate deltas from pointerdown; start begins a gesture, move/end require an active gesture. SDK defaults: 350 ms hold, 8 px pre-hold tolerance, pointer capture; drag suppresses the following click."
+        }
+      },
+      "required": [
+        "oxp",
+        "type"
+      ],
+      "additionalProperties": true,
+      "description": "Only the sending companion is affected. Anchor may change to any declared v0 anchor; size is clamped to the manifest size per axis, or 160 when omitted. Invalid requests are ignored. Anchor requests reset the persisted free position. Move positions are clamped to the viewport with 24 px margin and avoid the gear and dock. On a restored surface the first anchor request matching its saved anchor reaffirms that preset without clearing the free position, so plugin startup does not undo restoration. Later anchor requests always reset it."
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "route"
+        },
+        "value": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "$id": "urn:oxp-web-plugin:0:topic-route",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "boolean"
+                },
+                "destination": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "etaMs": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "distanceRemainingM": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "maneuver": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "minimum": 0,
+                          "maximum": 255
+                        },
+                        "road": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "distanceM": {
+                          "type": [
+                            "number",
+                            "null"
+                          ],
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "road",
+                        "distanceM"
+                      ],
+                      "additionalProperties": true
+                    }
+                  ]
+                },
+                "appName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "active",
+                "destination",
+                "etaMs",
+                "distanceRemainingM",
+                "maneuver",
+                "appName"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "motion"
+        },
+        "value": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "$id": "urn:oxp-web-plugin:0:topic-motion",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "speedMps": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  ]
+                },
+                "accuracyM": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  ]
+                },
+                "source": {
+                  "enum": [
+                    "geolocation",
+                    "vehicle",
+                    null
+                  ]
+                }
+              },
+              "required": [
+                "speedMps",
+                "accuracyM",
+                "source"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "parked"
+        },
+        "value": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "$id": "urn:oxp-web-plugin:0:topic-parked",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "enum": [
+                    "parked",
+                    "moving",
+                    "unknown"
+                  ]
+                },
+                "confirmedBy": {
+                  "enum": [
+                    "speed",
+                    "user",
+                    null
+                  ]
+                }
+              },
+              "required": [
+                "state",
+                "confirmedBy"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "state"
+        },
+        "topic": {
+          "const": "audioSource"
+        },
+        "value": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "$id": "urn:oxp-web-plugin:0:topic-audioSource",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "appName": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "appName"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topic",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "oxp": {
+          "const": "plugin/0"
+        },
+        "type": {
+          "const": "topics"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "session",
+              "nowPlaying",
+              "call",
+              "activity",
+              "route",
+              "motion",
+              "parked",
+              "audioSource"
+            ]
+          },
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "oxp",
+        "type",
+        "topics"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!(?:topics|artwork|close|error|hello|open|parked|ping|pong|quick-action|quick-action-state|state|storage|storage-get|storage-ok|storage-set|surface|surface-request|welcome)$).+"
+        },
+        "oxp": {
+          "const": "plugin/0"
+        }
+      },
+      "required": [
+        "type",
+        "oxp"
+      ],
+      "additionalProperties": true,
+      "description": "Unknown message types are ignored within this major version."
+    }
+  ]
+}

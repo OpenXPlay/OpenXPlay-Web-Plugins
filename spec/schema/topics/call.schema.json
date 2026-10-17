@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oxp-web-plugin:0:topic-call",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "idle",
+            "ringing",
+            "dialing",
+            "active",
+            "held",
+            "ending"
+          ]
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

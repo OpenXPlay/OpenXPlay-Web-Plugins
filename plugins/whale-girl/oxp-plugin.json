@@ -1,0 +1,86 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.whale-girl",
+  "version": "0.1.0",
+  "license": "(Apache-2.0 OR MIT) AND CC-BY-NC-SA-4.0 AND LicenseRef-YunYueSama-1.0",
+  "name": {
+    "en": "Whale Girl",
+    "zh-CN": "鲸鱼娘"
+  },
+  "description": {
+    "en": "An optional, non-commercial community character companion with gentle reactions and tap affection.",
+    "zh-CN": "可选的非商业社区角色伙伴，以轻柔的表情回应状态与摸头。"
+  },
+  "icon": "icon.svg",
+  "permissions": [
+    "session",
+    "nowPlaying",
+    "call",
+    "activity",
+    "storage"
+  ],
+  "surfaces": [
+    {
+      "id": "companion",
+      "kind": "companion",
+      "entry": "companion.html",
+      "usage": "driving",
+      "size": {
+        "w": 160,
+        "h": 160
+      },
+      "anchor": "bottom-right",
+      "label": {
+        "en": "Companion",
+        "zh-CN": "伙伴"
+      }
+    },
+    {
+      "id": "panel",
+      "kind": "panel",
+      "entry": "panel.html",
+      "usage": "driving",
+      "label": {
+        "en": "Settings & credits",
+        "zh-CN": "设置与致谢"
+      }
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "pat",
+      "icon": "heart.svg",
+      "label": {
+        "en": "Pat",
+        "zh-CN": "摸摸"
+      }
+    }
+  ],
+  "author": "OpenXPlay.org",
+  "attributions": [
+    {
+      "text": {
+        "en": "鲸鱼娘 by 上善无形\nhttps://www.bilibili.com/opus/1231977657712771073\nCC BY-NC-SA 4.0\n\nMaid design by ZipZipPipe\nhttps://www.pixiv.net/artworks/148186519\nCC BY-NC-SA 4.0\n\nSprite atlas by YunYueSama\n作者：YunYueSama\n仓库：https://github.com/YunYueSama/codex-deepseek-pet\nCommit: 7661c8b304c5400701f91da01b1a643a207331de\nLicence: 大肥鱼项目署名许可 1.0 (LicenseRef-YunYueSama-1.0).\nThe full licence accompanies these files in license-yunyuesama.txt.\n\nModification: apron emblem removed; rows relabelled.\nModified by OpenXPlay.org on 2026-10-16, released under CC BY-NC-SA 4.0.\nThe full CC BY-NC-SA 4.0 legal code accompanies these files in license.txt.\n\nThe character is a community fan character, not affiliated with or endorsed by DeepSeek.\nThe assets may not be used commercially.\n",
+        "zh-CN": "鲸鱼娘 by 上善无形\nhttps://www.bilibili.com/opus/1231977657712771073\nCC BY-NC-SA 4.0\n\nMaid design by ZipZipPipe\nhttps://www.pixiv.net/artworks/148186519\nCC BY-NC-SA 4.0\n\nSprite atlas by YunYueSama\n作者：YunYueSama\n仓库：https://github.com/YunYueSama/codex-deepseek-pet\nCommit: 7661c8b304c5400701f91da01b1a643a207331de\nLicence: 大肥鱼项目署名许可 1.0 (LicenseRef-YunYueSama-1.0).\nThe full licence accompanies these files in license-yunyuesama.txt.\n\nModification: apron emblem removed; rows relabelled.\nModified by OpenXPlay.org on 2026-10-16, released under CC BY-NC-SA 4.0.\nThe full CC BY-NC-SA 4.0 legal code accompanies these files in license.txt.\n\nThe character is a community fan character, not affiliated with or endorsed by DeepSeek.\nThe assets may not be used commercially.\n"
+      },
+      "links": [
+        {
+          "label": "CC BY-NC-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        },
+        {
+          "label": "上善无形 · 鲸鱼娘",
+          "url": "https://www.bilibili.com/opus/1231977657712771073"
+        },
+        {
+          "label": "ZipZipPipe · Maid design",
+          "url": "https://www.pixiv.net/artworks/148186519"
+        },
+        {
+          "label": "YunYueSama · Sprite atlas",
+          "url": "https://github.com/YunYueSama/codex-deepseek-pet"
+        }
+      ]
+    }
+  ]
+}

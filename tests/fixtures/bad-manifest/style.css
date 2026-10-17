@@ -1,0 +1,6 @@
+/*
+SPDX-FileCopyrightText: 2026 OpenXPlay.org
+SPDX-License-Identifier: Apache-2.0 OR MIT
+Created by riko chen on 2026-10-16
+*/
+body { margin: 0; background: #123; color: white; font: 16px sans-serif; } button { min-height: 56px; touch-action: none; }

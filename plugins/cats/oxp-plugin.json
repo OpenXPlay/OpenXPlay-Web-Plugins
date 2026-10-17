@@ -1,0 +1,70 @@
+{
+  "spec": "oxp-web-plugin/0",
+  "id": "org.openxplay.cats",
+  "version": "0.1.0",
+  "license": "(Apache-2.0 OR MIT) AND CC0-1.0",
+  "name": {
+    "en": "Cozy Cats",
+    "zh-CN": "猫咪伙伴"
+  },
+  "description": {
+    "en": "Four pixel cats with gentle daily routines and a parked play room.",
+    "zh-CN": "四种像素猫咪，日常安静陪伴，停车后接球玩耍。"
+  },
+  "icon": "assets/icon.png",
+  "permissions": [
+    "session",
+    "nowPlaying",
+    "call",
+    "activity",
+    "storage"
+  ],
+  "surfaces": [
+    {
+      "id": "companion",
+      "kind": "companion",
+      "entry": "index.html",
+      "usage": "driving",
+      "size": {
+        "w": 160,
+        "h": 160
+      },
+      "anchor": "bottom-right",
+      "label": {
+        "en": "Cat",
+        "zh-CN": "猫咪"
+      }
+    },
+    {
+      "id": "settings",
+      "kind": "panel",
+      "entry": "index.html",
+      "usage": "driving",
+      "label": {
+        "en": "Cat settings",
+        "zh-CN": "猫咪设置"
+      }
+    },
+    {
+      "id": "play",
+      "kind": "fullscreen",
+      "entry": "index.html",
+      "usage": "parked",
+      "label": {
+        "en": "Play with the cat",
+        "zh-CN": "和猫咪玩耍"
+      }
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "pet",
+      "icon": "assets/icon.png",
+      "label": {
+        "en": "Pet",
+        "zh-CN": "摸摸"
+      }
+    }
+  ],
+  "author": "OpenXPlay.org"
+}
