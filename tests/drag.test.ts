@@ -42,3 +42,11 @@ it('measures the tolerance in local CSS pixels when the receiver is scaled',()=>
   g.fire('pointermove',{screenX:104,clientX:28,clientY:30});expect(g.report).not.toHaveBeenCalled();
   g.fire('pointermove',{screenX:104.5,clientX:29,clientY:30});expect(g.report).toHaveBeenLastCalledWith({phase:'move',dx:4.5,dy:0});g.off();
 });
+it('reports cumulative screen deltas when a scaled companion follows the pointer',()=>{
+  const g=gesture();g.fire('pointerdown',{clientX:20,clientY:30});
+  g.fire('pointermove',{screenX:120,screenY:210,clientX:60,clientY:50});
+  expect(g.report).toHaveBeenLastCalledWith({phase:'move',dx:20,dy:10});
+  g.fire('pointermove',{screenX:140,screenY:220,clientX:60,clientY:50});
+  expect(g.report).toHaveBeenLastCalledWith({phase:'move',dx:40,dy:20});
+  g.fire('pointerup');expect(g.report).toHaveBeenLastCalledWith({phase:'end',dx:40,dy:20});g.off();
+});

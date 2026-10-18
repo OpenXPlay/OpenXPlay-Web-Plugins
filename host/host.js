@@ -4,13 +4,12 @@
 
 import { SPEC, TOPICS, validMessage, parseMessage, manifestErrors } from '../shared/protocol.js';
 import { Policy, reconnectDelay } from './policy.js';
-import { dockSize, surfaceRects, clipPath, planLayout } from './layout.js';
+import { dockSize, surfaceRects, clipPath, planLayout, dragPosition } from './layout.js';
 import { permittedState, permits } from './access.js';
 import { StorageBroker } from './storage.js';
 import { enableDragGesture } from '../shared/drag.js';
 import { validPrefs, validPosition } from '../shared/positions.js';
-import { layoutDelta } from '../shared/coordinates.js';
-import { resetPositions, pruneSurfaces, rememberSurfaces, restoreSurfaces, surfaceKey } from './preferences.js';
+import { resetPositions, loadPreferences, pruneSurfaces, rememberSurfaces, restoreSurfaces, surfaceKey } from './preferences.js';
 import { DataStore, topicAllowed } from './data.js';
 import { strings } from './strings.js';
 const policy = new Policy(), frames = new Map(), manifests = new Map(), broker = new StorageBroker(), pins = new Set(), actionStates = new Map();
@@ -94,14 +93,24 @@ function scheduleLayout(final=false) {
   layoutTimer=setTimeout(()=>{layoutTimer=undefined;lastLayout=now();sync();},Math.max(0,34-(now()-lastLayout)));
 }
 function enableDockDrag(element) {
+  let origin, local;
+  element.addEventListener('pointerdown',e=>{
+    if(e.button===0 && e.isPrimary!==false && !origin)origin={id:e.pointerId,x:e.clientX,y:e.clientY};
+  });
+  element.addEventListener('pointermove',e=>{
+    if(origin?.id===e.pointerId)local={dx:e.clientX-origin.x,dy:e.clientY-origin.y};
+  });
   enableDragGesture(element,move=>{
       if (move.phase==='start') { sendReceiver('wake'); dockGesture={...dockPosition()}; dock.className='lifted'; }
       if (!dockGesture) return;
-      const delta=layoutDelta(move,geometry.screenScale);
-      geometry.dockPosition={x:dockGesture.x+delta.dx,y:dockGesture.y+delta.dy};
+      // The dock's document stays fixed; client deltas already account for its actual frame scale.
+      const localMove=local && Number.isFinite(local.dx) && Number.isFinite(local.dy);
+      geometry.dockPosition=dragPosition(dockGesture,localMove?local:move,localMove?undefined:geometry.screenScale);
       scheduleLayout(move.phase==='end');
       if (move.phase==='end') { dockGesture=false; dock.className=''; }
     });
+  const clear=()=>{origin=local=undefined;};
+  for(const type of ['pointerup','pointercancel','lostpointercapture'])element.addEventListener(type,clear);
 }
 function renderDock() {
   // Retain the launcher element during a captured gesture and geometry updates.
@@ -388,7 +397,7 @@ window.addEventListener('message',event => {
       // Preferences bootstrap this host once. Geometry messages may echo stale storage
       // while a save/reset is in flight; they must never undo live host state.
       if (!prefsLoaded) {
-        hostPrefs=validPrefs(m.hostPrefs)?m.hostPrefs:{};
+        hostPrefs=loadPreferences(m.hostPrefs);
         pendingRestore=new Set(Object.keys(hostPrefs.surfaces ?? {})); prefsLoaded=true;
         lastPrefs=JSON.stringify(hostPrefs);
       }
@@ -421,8 +430,7 @@ window.addEventListener('message',event => {
       const move=m.move;
       if(move.phase==='start') { frame.drag={x:frame.rect.x,y:frame.rect.y}; frame.element.className='lifted'; }
       if(frame.drag) {
-        const delta=layoutDelta(move,geometry.screenScale);
-        frame.surface.position={x:frame.drag.x+delta.dx,y:frame.drag.y+delta.dy};
+        frame.surface.position=dragPosition(frame.drag,move,geometry.screenScale);
         scheduleLayout(move.phase==='end');
         if(move.phase==='end') { frame.drag=undefined;frame.element.className=''; }
       }
