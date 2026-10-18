@@ -59,7 +59,11 @@ function frame(wall) {
     ctx.clearRect(0,0,w,h);
     ctx.globalAlpha=value.brightness;
     if(value.enabled&&w>=4&&h>=4){
-      if(value.effect==='progress')drawProgress(ctx,w,h,frozenProgress,color());
+      if(value.effect==='progress') {
+        const rect=host.surface.video;
+        const video=rect?{x:rect.x*w/host.surface.w,y:rect.y*h/host.surface.h,w:rect.w*w/host.surface.w,h:rect.h*h/host.surface.h}:undefined;
+        drawProgress(ctx,w,h,frozenProgress,color(),video);
+      }
       if(value.effect==='album')drawGlow(ctx,w,h,host.reducedMotion?to:color());
       if(value.effect==='sky')drawSky(ctx,w,h,frozenHour);
     }

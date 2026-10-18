@@ -21,10 +21,27 @@ export function drawGlow(ctx,w,h,color) {
   gradient.addColorStop(1,`rgba(${color.join(',')},0.8)`);
   ctx.fillStyle=gradient; ctx.fillRect(0,0,w,h);
 }
-// Host v0 supplies no video rectangle. A perimeter sweep fills the clipped margins;
-// the outer hairline is a fallback until picture geometry is exposed to plugins.
-export function drawProgress(ctx,w,h,amount,color) {
+export function progressPath(rect,amount) {
+  const {x,y,w,h}=rect, points=[[x,y]], corners=[[x+w,y],[x+w,y+h],[x,y+h],[x,y]];
+  let left=clamp(amount)*2*(w+h), current=points[0];
+  for(const next of corners) {
+    if(left<=0)break;
+    const length=Math.hypot(next[0]-current[0],next[1]-current[1]), fraction=Math.min(1,left/length);
+    points.push([current[0]+(next[0]-current[0])*fraction,current[1]+(next[1]-current[1])*fraction]);
+    left-=length;current=next;
+  }
+  return points;
+}
+export function drawProgress(ctx,w,h,amount,color,video) {
   if (amount === null || amount <= 0) return;
+  if(video && ['x','y','w','h'].every(k=>Number.isFinite(video[k])) && video.w>0 && video.h>0) {
+    const [start,...points]=progressPath(video,amount);
+    ctx.save();ctx.beginPath();ctx.moveTo(...start);
+    for(const point of points)ctx.lineTo(...point);
+    ctx.strokeStyle=rgb(color);ctx.lineWidth=2;ctx.lineJoin='miter';ctx.stroke();ctx.restore();
+    return;
+  }
+  // Older hosts use a perimeter sweep through the clipped page margins.
   const points=[[w/2,0],[w,0],[w,h],[0,h],[0,0],[w/2,0]];
   let left=clamp(amount)*2*(w+h), x=w/2, y=0;
   ctx.beginPath(); ctx.moveTo(w/2,h/2); ctx.lineTo(x,y);
