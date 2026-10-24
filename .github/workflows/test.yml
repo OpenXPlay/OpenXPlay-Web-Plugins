@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 # Created by riko chen on 2026-10-16
 name: Test
-on: [push, pull_request]
+# Pull requests run the checks that main requires; push runs only for main itself.
+on:
+  push:
+    branches: [main]
+  pull_request:
 permissions:
   contents: read
 jobs:
