@@ -48,3 +48,20 @@ it('starts fireplace audio off and closes when parked confirmation is lost',asyn
   expect(e.host.surface.close).not.toHaveBeenCalled();
   e.host.parked='unknown';e.callbacks.surface();expect(e.host.surface.close).toHaveBeenCalledOnce();
 });
+it('redraws the progress border with current video coordinates after resize and orientation updates',async()=>{
+  const e=environment();e.host.state.nowPlaying={title:'Track',artist:'Artist',album:'Album',durationMs:1000,elapsedMs:500,playing:false,rate:1};
+  const calls=[],gradient={addColorStop:vi.fn()};
+  const ctx=new Proxy({moveTo:(...p)=>calls.push(['moveTo',...p]),lineTo:(...p)=>calls.push(['lineTo',...p]),createRadialGradient:()=>gradient},{get:(t,k)=>t[k]??vi.fn()});
+  e.elements.canvas.getContext=()=>ctx;
+  e.host.surface.video={x:20,y:30,w:800,h:450};
+  await import('../ambient.js');
+  e.frames.shift()(1000);
+  expect(calls).toContainEqual(['moveTo',10,15]);expect(calls).toContainEqual(['lineTo',410,240]);
+  for(const [w,h,video] of [[1001,601,{x:40,y:60,w:900,h:500}],[601,1001,{x:10,y:20,w:580,h:950}]]){
+    calls.length=0;Object.assign(e.host.surface,{w,h,video});e.callbacks.surface();
+    await vi.advanceTimersByTimeAsync(250);e.frames.shift()(2000+h);
+    const sx=Math.round(w/2)/w,sy=Math.round(h/2)/h;
+    const start=calls.find(c=>c[0]==='moveTo');expect(start[1]).toBeCloseTo(video.x*sx);expect(start[2]).toBeCloseTo(video.y*sy);
+    const end=calls.filter(c=>c[0]==='lineTo').at(-1);expect(end[1]).toBeCloseTo((video.x+video.w)*sx);expect(end[2]).toBeCloseTo((video.y+video.h)*sy);
+  }
+});

@@ -3,6 +3,12 @@
 // Created by riko chen on 2026-10-16
 
 import { placeFree, validPosition } from '../shared/positions.js';
+import { layoutDelta } from '../shared/coordinates.js';
+
+export function dragPosition(start, move, scale) {
+  const {dx,dy}=layoutDelta(move,scale);
+  return {x:start.x+dx,y:start.y+dy};
+}
 
 export function clamp(rect, viewport) {
   const x = Math.max(0, Math.min(viewport.w, rect.x)), y = Math.max(0, Math.min(viewport.h, rect.y));

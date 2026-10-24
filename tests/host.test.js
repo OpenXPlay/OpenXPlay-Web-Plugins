@@ -153,7 +153,7 @@ it('moves only an active companion, throttles layout, persists and resets its fr
 });
 it('restores free positions without losing them to the pet startup anchor',async()=>{
   const e=await environment({dock:{x:300,y:200,dragged:true},companions:{[`${manifest.id}/widget`]:{x:450,y:100,anchor:'bottom-left'}}});
-  e.launch();e.click('Show Pet');const frame=e.frames()[0];e.hello(frame);expect(frame.style.left).toBe('450px');
+  const frame=e.frames()[0];e.hello(frame);expect(frame.style.left).toBe('450px');
   e.receive({oxp:'plugin/0',type:'surface-request',anchor:'bottom-left'},frame.contentWindow);expect(frame.style.left).toBe('450px');
   e.receive({oxp:'plugin/0',type:'surface-request',anchor:'bottom-left'},frame.contentWindow);expect(frame.style.left).toBe('24px');
 });
@@ -423,4 +423,30 @@ it.each([{w:880,h:518},{w:360,h:640}])('publishes the open launcher exemption at
   expect(layout.regions).toContainEqual(layout.launcher);
   e.click('关闭');
   expect(e.messages.filter(m=>m.type==='layout').at(-1).launcher).toBeUndefined();
+});
+
+it('roundtrips active companions and their placements across a fresh host reload',async()=>{
+  const first=await environment();first.launch();first.click('Show Pet');const frame=first.frames()[0];first.hello(frame);
+  for(const [phase,dx,dy] of [['start',0,0],['end',320,100]])first.receive({oxp:'plugin/0',type:'surface-request',move:{phase,dx,dy}},frame.contentWindow);
+  const saved=first.messages.filter(m=>m.type==='host-prefs').at(-1).value;
+  vi.clearAllTimers();
+  const second=await environment(saved);
+  expect(second.frames()).toHaveLength(1);expect(second.frames()[0].style.left).toBe('344px');expect(second.frames()[0].style.top).toBe('124px');
+  expect(second.frames()[0].attributes.sandbox).toBe('allow-scripts');
+});
+it.each([
+  {surfaces:{'org.openxplay.fixture/widget':null}},
+  {surfaces:[]}, {surfaces:42}, {surfaces:'broken',companions:null},
+  {companions:{'org.openxplay.fixture/widget':null}},
+  {surfaces:{'org.gone/widget':{x:300,y:100}}}
+])('ignores corrupt or uninstalled selections on startup: %j',async prefs=>{
+  const e=await environment(prefs);expect(e.frames()).toHaveLength(0);expect(e.elements.dock.children).toHaveLength(1);
+});
+it.each([.5,.75,1,1.5])('uses actual dock pointer coordinates at frame scale %s even with stale receiver geometry',async scale=>{
+  const e=await environment(undefined,{x:1,y:1}),button=e.elements.dock.children[0];
+  const event={pointerId:1,button:0,screenX:500,screenY:300,clientX:500/scale,clientY:300/scale,preventDefault:()=>{}};
+  button.listeners.pointerdown(event);
+  button.listeners.pointermove({...event,screenX:500-60*scale,screenY:300-40*scale,clientX:event.clientX-60,clientY:event.clientY-40});
+  button.listeners.pointerup(event);
+  expect(e.messages.filter(m=>m.type==='host-prefs').at(-1).value.dock).toEqual({x:672,y:398,dragged:true});
 });

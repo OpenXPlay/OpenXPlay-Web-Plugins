@@ -4,7 +4,7 @@
 
 import {it,expect} from 'vitest';
 import {Policy} from '../host/policy.js';
-import {pruneSurfaces,rememberSurfaces,restoreSurfaces} from '../host/preferences.js';
+import {loadPreferences,pruneSurfaces,rememberSurfaces,restoreSurfaces} from '../host/preferences.js';
 const surfaces=[{id:'cat',kind:'companion',usage:'driving',anchor:'top-left'},{id:'sky',kind:'ambient',usage:'driving'},{id:'panel',kind:'panel',usage:'driving'},{id:'parked',kind:'companion',usage:'parked'}];
 const manifests=new Map([['org.pet',{surfaces}]]);
 it('roundtrips anchored, free and ambient selections, excluding transient covers',()=>{
@@ -29,4 +29,17 @@ it('drops disabled, uninstalled, removed and nonpersistent surfaces and sanitize
  expect(pruneSurfaces(saved,manifests,new Set())).toEqual({'org.pet/cat':{}});
  expect(pruneSurfaces(saved,manifests,new Set(['org.pet']))).toEqual({});
  const pending=new Set(Object.keys(saved));restoreSurfaces({},pending,manifests,new Policy(),0);expect(pending.size).toBe(0);
+});
+it('never restores a disabled plugin from pending selections',()=>{
+ const policy=new Policy();policy.disabled.add('org.pet');
+ const saved=pruneSurfaces({'org.pet/cat':{x:300,y:100}},manifests,policy.disabled),pending=new Set(['org.pet/cat']);
+ restoreSurfaces(saved,pending,manifests,policy,0);expect(policy.loaded).toEqual([]);expect(pending.size).toBe(0);
+});
+it('migrates legacy companions but honours an explicit selection map and ignores corrupt preferences',()=>{
+ const companions={'org.pet/cat':{x:300,y:100,anchor:'top-left'}};
+ expect(loadPreferences({companions}).surfaces).toEqual(companions);
+ expect(loadPreferences({companions,surfaces:{}}).surfaces).toEqual({});
+ for(const prefs of [undefined,null,[],42,'broken'])expect(loadPreferences(prefs)).toEqual({});
+ expect(loadPreferences({companions:null,surfaces:{'org.pet/cat':null}})).toEqual({companions:{},surfaces:{}});
+ expect(pruneSurfaces({'org.pet/cat/extra':{}},manifests,new Set())).toEqual({});
 });
