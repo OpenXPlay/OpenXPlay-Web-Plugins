@@ -34,3 +34,5 @@ npm run conformance -- https://relay.example --insecure --expect-off
 `npm run dev -- --enable` 会在模拟器中加载官方插件。模拟器运行在 `http://localhost:5173`，插件默认关闭，可在模拟器控件中启用，或使用 `--enable`／`--fixture valid` 启用。`--storage <directory>` 为每个插件启用 JSON 持久化存储。插件文档必须使用 `color-scheme: light`（或默认的 `normal`），以匹配宿主中浅色的插件 iframe 元素并保留透明背景。宿主根节点跟随接收端的 `theme`。请从 `dist/sdk/` 复制一份 SDK，随你的插件一起打包；在 opaque frame 中，经典脚本（包括防护脚本）、样式和图片要加上 `crossorigin="anonymous"`。一致性测试在写入测试后会恢复原有存储；如果一开始没有存储，测试后会变为 `{}`，因为 v0 没有删除操作。
 
 许可证：**Apache-2.0 OR MIT，由你任选其一**。详见 `LICENSE-APACHE` 和 `LICENSE-MIT`。
+
+贡献须遵循 [OpenXPlay 贡献者许可协议](https://github.com/OpenXPlay/OpenXPlay/blob/main/CLA.md)（协议文本为英文）。在任意一个 OpenXPlay 仓库的 pull request 里按提示回复一次即可，之后所有仓库的 CLA 检查都会通过。

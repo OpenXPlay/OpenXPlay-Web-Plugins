@@ -34,3 +34,5 @@ npm run conformance -- https://relay.example --insecure --expect-off
 `npm run dev -- --enable` loads the official plugins in the simulator. The simulator starts at `http://localhost:5173`, with plugins off unless enabled in its controls or with `--enable` / `--fixture valid`. `--storage <directory>` enables per-plugin JSON persistence. Plugin documents must use `color-scheme: light` (or the default `normal`) to match the host’s light plugin iframe elements and preserve transparent backgrounds. The host root follows the receiver’s `theme`. Package your own SDK copy from `dist/sdk/`; use `crossorigin="anonymous"` on classic scripts (including the guard), styles and images inside opaque frames. Conformance restores existing storage after write tests; an initially absent store becomes `{}` because v0 has no delete operation.
 
 Licence: **Apache-2.0 OR MIT at your option**. See `LICENSE-APACHE` and `LICENSE-MIT`.
+
+Contributions are accepted under the [OpenXPlay Contributor License Agreement](https://github.com/OpenXPlay/OpenXPlay/blob/main/CLA.md). Accept it once by replying on a pull request to any OpenXPlay repository; the CLA check then passes in all of them.
